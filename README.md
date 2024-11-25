@@ -1,49 +1,58 @@
-# ChristmasNameOrnament
-Customizable Christmas ornament generator with options for text, fonts, snowflake designs, and multi-color 3D printing.
+# Customizable Christmas Name Ornament
 
+This project is a revamped and improved version of the original customizable Christmas ornament generator. It allows you to create personalized ornaments with a variety of customization options, all designed to be easier to use and compatible with batch exporting tools for faster workflow.
 
 ## Features
 
-- **Custom Text and Fonts**: Add any text using fonts available on your system.
-- **Snowflake Decorations**: Choose from six different snowflake designs and position them in multiple configurations.
-- **Multi-Color Printing Support**: Easily create dual-color ornaments with single extruder printers.
-- **Batch Export Compatibility**: Export multiple customized ornaments simultaneously for streamlined workflows.
-- **Resizable Design**: Default diameter is 79 mm, but it can be scaled to any size in your slicer.
-
-## Updates
-
-- **Batch Export Compatibility**: Improved support for batch processing tools.
-- **Enhanced User Interface**: Simplified parameters for faster customization.
-- **Additional Features**:
-  - Option for a second line of text.
-  - Create ornaments without a background line or with separate STL files for multi-nozzle printing.
+- **Text Customization**: Add any text to your ornament in any font available on your system.
+- **Snowflake Designs**: Choose from six different snowflake styles and place them in four set locations on the ornament.
+- **Multi-Line Support**: Option to include a second line of text for additional personalization.
+- **Batch Export Compatibility**: Fully compatible with batch exporting tools for streamlined production.
+- **Multi-Color Printing**: Generate separate STL files for the ornament outline, background, text, and snowflakes, enabling easy multi-nozzle or single-nozzle dual-color printing.
+- **Easy Scaling**: Default size is 79mm in diameter, but you can scale it to any size in your slicer.
+- **Blank Templates**: Includes blank ornaments for custom designs in external software like Fusion 360.
 
 ## Getting Started
 
 ### Running the Customizer
 
-To create your custom ornaments:
-1. Download and install [OpenSCAD](https://www.openscad.org/).
-2. Open the `.scad` file in OpenSCAD.
-3. Modify the parameters in the customizer interface.
-4. Render and export your custom ornament as an STL file.
+You can run this customizer locally on your computer using [OpenSCAD](https://openscad.org):
 
-### Fonts
+1. Install OpenSCAD if you haven’t already.
+2. Open the `.scad` file included in the repository.
+3. Adjust the parameters in the customizer panel to fit your desired design.
+4. Render and export your customized STL files.
 
-You can use any font installed on your system. To ensure compatibility:
-1. Install fonts directly on your system or place font files in the same folder as the `.scad` file.
-2. Restart OpenSCAD to refresh the font list.
+### Font Configuration
 
-### Batch Export
+To use custom fonts:
 
-For batch exporting:
-1. Use tools like [PrusaSlicer](https://www.prusa3d.com/prusaslicer/) or custom OpenSCAD scripts to process multiple configurations.
-2. Export all designs in a single batch to save time.
+1. Install the desired font on your system.
+2. Restart OpenSCAD to recognize the newly added font.
+3. Select the font from the dropdown menu in the customizer panel.
 
-## Printing Tips
+### Multi-Color Printing
 
-- **Dual Colors with Single Extruder**:
-  - Pause your print at the appropriate layer to swap filament colors.
-  - Use the provided swap tower for priming the extruder during filament changes.
-- **Slicer Settings**:
-  - Set the top infill to a solid continuous print for a polished finish. In Cura, adjust the `Skin Expand Distance` to a high value (e.g., 10 mm).
+For multi-color prints:
+
+1. Export the separate STL files for each part (outline, background, text, and snowflakes).
+2. Load the files into your slicer and assign different colors to each part.
+3. Use a dual-extruder or filament swapping techniques for a polished result.
+
+## Tips for Best Results
+
+- Use the **Skin Expand Distance** setting in Cura or equivalent settings in your slicer to ensure clean, continuous top layers.
+- Add a small cylinder in the slicer to prime the nozzle when swapping filaments for single-extruder dual-color prints.
+- Adjust the "Name Y Offset" parameter if text placement is misaligned in the preview.
+
+## Acknowledgments
+
+This project is based on the original customizable ornament by [Lyl3 on Thingiverse](https://www.thingiverse.com/thing:4681765). Improvements have been made to enhance usability and introduce compatibility with batch processing tools.
+
+## License
+
+This project is licensed under the [Creative Commons - Attribution - Share Alike](https://creativecommons.org/licenses/by-sa/4.0/) license. You are free to remix and share this project as long as you give appropriate credit and share your contributions under the same license.
+
+## Feedback
+
+If you have any suggestions, issues, or feedback, feel free to open an issue or submit a pull request. We welcome contributions to improve this project!
