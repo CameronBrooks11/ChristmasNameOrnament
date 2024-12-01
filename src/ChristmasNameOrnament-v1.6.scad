@@ -18,6 +18,7 @@ V1.3 - added a dummy statement so that Thingiverse customizer can handle a backg
 V1.4 - added an additional line of text for a year or date or whatever
 V1.5 - fixed bug that wasn't using setting for "other" font for the additional line of text
        changed default "other" font for name and additional line of text so that those parameters can be specified in the Thingiverse customizer
+V1.6 - for use with OBE
 */
 
 /* [Basic Parameters] */
