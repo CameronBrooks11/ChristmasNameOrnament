@@ -19,6 +19,7 @@ V1.4 - added an additional line of text for a year or date or whatever
 V1.5 - fixed bug that wasn't using setting for "other" font for the additional line of text
        changed default "other" font for name and additional line of text so that those parameters can be specified in the Thingiverse customizer
 V1.6 - for use with OBE
+V1.7 - scale a long name down to fit inside the ball (Cameron Brooks)
 */
 
 /* [Basic Parameters] */
@@ -40,6 +41,9 @@ line_under_name = "yes"; // [yes,no]
 /* [Font Parameters] */
 
 font_size = 15; // [5:30]
+
+// The widest the name can be (mm). A wider name is scaled down to this width, keeping its proportions, so it stays inside the ball. Enter zero to leave the name at full size. This needs an OpenSCAD version with textmetrics(); older versions, such as 2021.01, print a warning and leave the name at full size.
+name_max_width = 70; // [0:1:79]
 
 // Choose from a small selection of fonts that should work well in this application (NOTE: Arial is not available on the Thingiverse customizer and the others are not available on the OpenSCAD customizer unless you have installed them on your computer).
 font_name = 3; // [ 0:other, 1:Arial Black, 2:Arial Bold Italic, 3:Berkshire Swash, 4:Courgette, 5:Sriracha, 6:Yellowtail, 7:Tangerine, 8:Parisienne, 9:Italianno]
@@ -108,6 +112,11 @@ selectedFont = (font_name==0) ? other_font : fontNames[font_name];
 
 text2_selectedFont = (text2_font==0) ? text2_other_font : fontNames[text2_font];
 
+// textmetrics() returns undef, with a warning, in versions that don't have it.
+name_metrics = textmetrics(name,size=font_size,halign="center",valign="baseline",font=selectedFont);
+name_width = is_undef(name_metrics) ? undef : name_metrics.size[0];
+name_scale = (name_max_width > 0 && is_num(name_width) && name_width > name_max_width) ? name_max_width / name_width : 1;
+
 flakeAngles=[0, 55, -47, -115, 132];
 
 flakeScale = 0.133;
@@ -158,7 +167,7 @@ if (part == 2 || part == 6) {
           circle(d=75,$fn=80);
         }
       }
-      translate([name_X_offset,-7+name_Y_offset,0]) text(name,size=font_size,halign="center",valign="baseline",font=selectedFont);
+      translate([name_X_offset,-7+name_Y_offset,0]) scale([name_scale,name_scale]) text(name,size=font_size,halign="center",valign="baseline",font=selectedFont);
     }
   }
 }
