@@ -4,9 +4,8 @@ A flat, 79 mm Christmas ball ornament with a name across it, up to four
 snowflakes, and an optional second line of text, made in OpenSCAD. Every part
 can be exported on its own for printing in two or more colours.
 
-It's Lyl3's [Christmas Name Ornament](https://www.thingiverse.com/thing:4681765)
-from Thingiverse, with presets for batch export and a long name scaled down to
-fit inside the ball.
+A long name is scaled down to fit inside the ball, and the presets export in
+one batch with [scadbatch](https://github.com/CameronBrooks11/scadbatch).
 
 ![The default ornament: "Lyle" over a red background, with four snowflakes](assets/ornament.png)
 
@@ -110,13 +109,12 @@ were written against OpenSCAD 2026.10.15.
 
 `just images` renders the two pictures in this README.
 
-## Credits and licence
+## Origin and licence
 
-The design and nearly all of the code are Lyl3's, from
-[Thingiverse thing 4681765](https://www.thingiverse.com/thing:4681765). The
-source header keeps their version history. My changes are marked V1.6 (for
-batch export, with the presets in the JSON) and V1.7 (name fitting).
-
-Lyl3 published it under
-[CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), and this
-version uses the same licence; see [LICENSE](LICENSE).
+The ornament grew from Lyl3's
+[Christmas Name Ornament](https://www.thingiverse.com/thing:4681765) on
+Thingiverse, published under
+[CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/). This version
+keeps that licence; see [LICENSE](LICENSE). The source header keeps the full
+version history: Lyl3's V0.1 to V1.5, then V1.6 (batch export and its presets)
+and V1.7 (name fitting).
