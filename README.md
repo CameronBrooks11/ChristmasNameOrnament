@@ -1,58 +1,122 @@
-# Customizable Christmas Name Ornament
+# Christmas Name Ornament
 
-This project is a revamped and improved version of the original customizable Christmas ornament generator. It allows you to create personalized ornaments with a variety of customization options, all designed to be easier to use and compatible with batch exporting tools for faster workflow.
+A flat, 79 mm Christmas ball ornament with a name across it, up to four
+snowflakes, and an optional second line of text, made in OpenSCAD. Every part
+can be exported on its own for printing in two or more colours.
 
-## Features
+It's Lyl3's [Christmas Name Ornament](https://www.thingiverse.com/thing:4681765)
+from Thingiverse, with presets for batch export and a long name scaled down to
+fit inside the ball.
 
-- **Text Customization**: Add any text to your ornament in any font available on your system.
-- **Snowflake Designs**: Choose from six different snowflake styles and place them in four set locations on the ornament.
-- **Multi-Line Support**: Option to include a second line of text for additional personalization.
-- **Batch Export Compatibility**: Fully compatible with batch exporting tools for streamlined production.
-- **Multi-Color Printing**: Generate separate STL files for the ornament outline, background, text, and snowflakes, enabling easy multi-nozzle or single-nozzle dual-color printing.
-- **Easy Scaling**: Default size is 79mm in diameter, but you can scale it to any size in your slicer.
-- **Blank Templates**: Includes blank ornaments for custom designs in external software like Fusion 360.
+![The default ornament: "Lyle" over a red background, with four snowflakes](assets/ornament.png)
 
-## Getting Started
+## Use it
 
-### Running the Customizer
+Open `src/ChristmasNameOrnament.scad` in [OpenSCAD](https://openscad.org) and
+set the parameters in the Customizer panel:
 
-You can run this customizer locally on your computer using [OpenSCAD](https://openscad.org):
+- **Name** and **font**, the font size, and whether there is a line under the
+  name.
+- **Snowflakes:** one of six designs, or none, in each of four places.
+- **Background thickness:** the red disc behind the details. Zero leaves it out.
+- **Second line of text**, such as a year. You'll usually have to move it with
+  its X and Y offsets.
+- **Part:** the ball outline, the name, the second line, the snowflakes, the
+  background, or everything.
 
-1. Install OpenSCAD if you haven’t already.
-2. Open the `.scad` file included in the repository.
-3. Adjust the parameters in the customizer panel to fit your desired design.
-4. Render and export your customized STL files.
+The Customizer also lists the five example presets in
+`src/ChristmasNameOrnament.json`, which OpenSCAD loads because it has the same
+name as the `.scad` file.
 
-### Font Configuration
+### Long names
 
-To use custom fonts:
+A name wider than `name_max_width` (70 mm by default) is scaled down to that
+width, keeping its proportions. At the default size of 15, "Christopher" in
+Liberation Sans is 106 mm wide and would hang outside the ball; here it's
+scaled to 70 mm:
 
-1. Install the desired font on your system.
-2. Restart OpenSCAD to recognize the newly added font.
-3. Select the font from the dropdown menu in the customizer panel.
+![The ornament with "Christopher" fitted inside the ball](assets/ornament-long-name.png)
 
-### Multi-Color Printing
+Set `name_max_width` to 0 to leave the name at full size. Fitting needs an
+OpenSCAD version with `textmetrics()`. OpenSCAD 2021.01 doesn't have it: there
+it warns `Ignoring unknown function 'textmetrics'` and leaves the name at full
+size.
 
-For multi-color prints:
+### Fonts
 
-1. Export the separate STL files for each part (outline, background, text, and snowflakes).
-2. Load the files into your slicer and assign different colors to each part.
-3. Use a dual-extruder or filament swapping techniques for a polished result.
+The font list offers Arial Black and Arial Bold Italic, and seven
+[Google Fonts](https://fonts.google.com): Berkshire Swash, Courgette, Sriracha,
+Yellowtail, Tangerine, Parisienne and Italianno. Choose "other" to name any
+installed font, in the form `Nunito Sans:style=Bold Italic`. Help > Font List
+in OpenSCAD shows what's installed. Restart OpenSCAD after installing a font.
 
-## Tips for Best Results
+**If a font isn't installed, OpenSCAD uses another one without a warning.**
+Check the preview before exporting.
 
-- Use the **Skin Expand Distance** setting in Cura or equivalent settings in your slicer to ensure clean, continuous top layers.
-- Add a small cylinder in the slicer to prime the nozzle when swapping filaments for single-extruder dual-color prints.
-- Adjust the "Name Y Offset" parameter if text placement is misaligned in the preview.
+### Several colours
 
-## Acknowledgments
+Export each part (outline, name, second line, snowflakes, background) as its
+own STL, load them together in the slicer, and give each a filament or an
+extruder. With one nozzle, print the background in one colour and change
+filament for the rest. A small cylinder placed in the slicer gives the nozzle
+somewhere to prime after the change.
 
-This project is based on the original customizable ornament by [Lyl3 on Thingiverse](https://www.thingiverse.com/thing:4681765). Improvements have been made to enhance usability and introduce compatibility with batch processing tools.
+If there's no background, or no second line, exporting that part gives a
+0.01 mm placeholder instead of an empty file. It sits inside the ring.
 
-## License
+### Batch export
 
-This project is licensed under the [Creative Commons - Attribution - Share Alike](https://creativecommons.org/licenses/by-sa/4.0/) license. You are free to remix and share this project as long as you give appropriate credit and share your contributions under the same license.
+[scadbatch](https://github.com/CameronBrooks11/scadbatch) exports every preset
+in one run:
 
-## Feedback
+```sh
+scadbatch export src/ChristmasNameOrnament.scad src/ChristmasNameOrnament.json out/
+```
 
-If you have any suggestions, issues, or feedback, feel free to open an issue or submit a pull request. We welcome contributions to improve this project!
+Add your own names as presets in the JSON, or save them from the Customizer.
+
+## Printing
+
+- The ornament prints flat. At the defaults it's 2 mm thick: a 0.4 mm
+  background and 1.6 mm details.
+- In Cura, **Skin Expand Distance** keeps the top layers of thin details
+  continuous; other slicers have an equivalent setting.
+- To print a different size, scale it in the slicer.
+
+## Known limits
+
+- **With no background, the ring and the underline hold everything together.**
+  The underline stays on when there's no background, whatever
+  `line_under_name` says. Each snowflake reaches the ring from every position.
+  The dot of an `i` or a `j` doesn't reach anything, so it prints as a loose
+  piece. "Liam" and "Sophia" in Liberation Sans each come out as two pieces.
+- **The second line is placed by hand.** Nothing keeps it inside the ball or
+  off the snowflakes.
+- With no background, the details start 0.01 mm below the ring. The ornament
+  is 1.61 mm thick instead of 1.6.
+- In OpenSCAD 2021.01, rendering "Everything" took 76 s and reported
+  `The given mesh is not closed`, though it still wrote one solid of the right
+  size. Each part on its own rendered without errors. 2026.10.15 renders
+  everything in under a second.
+
+## Checks
+
+`just test` takes about 4 s. For 17 cases and the 5 presets, it renders the
+ornament with warnings treated as errors, then checks how many separate solids
+it has and its size. The cases cover each part, a long name with and without
+fitting, and no background with each snowflake in every position. They use
+Liberation Sans, which has to be installed (`fonts-liberation` on Debian), and
+were written against OpenSCAD 2026.10.15.
+
+`just images` renders the two pictures in this README.
+
+## Credits and licence
+
+The design and nearly all of the code are Lyl3's, from
+[Thingiverse thing 4681765](https://www.thingiverse.com/thing:4681765). The
+source header keeps their version history. My changes are marked V1.6 (for
+batch export, with the presets in the JSON) and V1.7 (name fitting).
+
+Lyl3 published it under
+[CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), and this
+version uses the same licence; see [LICENSE](LICENSE).
