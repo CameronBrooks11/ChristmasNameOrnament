@@ -88,15 +88,9 @@ Add your own names as presets in the JSON, or save them from the Customizer.
   The underline stays on when there's no background, whatever
   `line_under_name` says. Each snowflake reaches the ring from every position.
   The dot of an `i` or a `j` doesn't reach anything, so it prints as a loose
-  piece. "Liam" and "Sophia" in Liberation Sans each come out as two pieces.
+  piece: "Liam" in Liberation Sans comes out as two pieces.
 - **The second line is placed by hand.** Nothing keeps it inside the ball or
   off the snowflakes.
-- With no background, the details start 0.01 mm below the ring. The ornament
-  is 1.61 mm thick instead of 1.6.
-- In OpenSCAD 2021.01, rendering "Everything" took 76 s and reported
-  `The given mesh is not closed`, though it still wrote one solid of the right
-  size. Each part on its own rendered without errors. 2026.10.15 renders
-  everything in under a second.
 
 ## Checks
 
@@ -111,10 +105,10 @@ were written against OpenSCAD 2026.10.15.
 
 ## Origin and licence
 
-The ornament grew from Lyl3's
+The ornament is a rewrite, under MIT, of an idea from Lyl3's
 [Christmas Name Ornament](https://www.thingiverse.com/thing:4681765) on
-Thingiverse, published under
-[CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/). This version
-keeps that licence; see [LICENSE](LICENSE). The source header keeps the full
-version history: Lyl3's V0.1 to V1.5, then V1.6 (batch export and its presets)
-and V1.7 (name fitting).
+Thingiverse: a name across a flat ball ornament, with snowflakes. The code, the
+ball outline and the six snowflakes, drawn by one generator, are new; the
+parameters and presets keep their names, so saved presets still load. The
+earlier CC BY-SA 3.0 versions are in this repository's history. MIT; see
+[LICENSE](LICENSE).
