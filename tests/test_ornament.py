@@ -68,15 +68,16 @@ def render(openscad, out, params, preset=None):
 
 
 LONG = "Christopher"  # 106.28 mm wide at font_size 15 in Liberation Sans
-FLAT = 1.61  # with no background the details sit 0.01 mm below the ring
+FLAT = 1.6  # with no background, only the details
 
 CASES = [
     # (label, parameters, solids, x, y, z)
     ("defaults", {}, 1, 79, 85, 2),
     ("ball outline", {"part": 1}, 1, 79, 85, 2),
-    ("name", {"part": 2}, 1, 73.63, 19.42, 1.6),
+    # The underline is a chord of the ring, just under the name's baseline.
+    ("name", {"part": 2}, 1, 76.54, 19.42, 1.6),
     ("additional text", {"part": 3, "text2": "2026"}, 4, 20.71, 6.88, 1.6),
-    ("snowflakes", {"part": 4}, 4, 63.75, 74.76, 1.6),
+    ("snowflakes", {"part": 4}, 4, 61.87, 67.24, 1.6),
     ("background", {"part": 5}, 1, 75.01, 75.01, 0.4),
     ("long name", {"name": LONG}, 1, 79, 85, 2),
     (
@@ -122,8 +123,6 @@ def main():
     for name, values in presets.items():
         z = float(values.get("background_thickness", "0.4")) + float(
             values.get("details_thickness", "1.6"))
-        if float(values.get("background_thickness", "0.4")) == 0:
-            z += 0.01
         runs.append((f"preset: {name}", {}, name, (1, 79, 85, z)))
 
     failed = 0
